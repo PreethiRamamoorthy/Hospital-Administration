@@ -5,7 +5,7 @@ The online platform that are being used in the hospitals are extensive with the 
 
 The project we are planning to create is a hospital administration app wherein we will use it for creating new patients, new doctor getting associated with that hospital, booking an appointment for new as well as existing patients, editing an appointment, deleting an appointment,viewing all the details, selecting a particular detail with a specific search condition etc. This app can be viewed as a one stop place for handling and viewing all the appointments.
 
-# Tech Stack
+## Tech Stack
 Java
 SpringBoot
 MySQL.
