@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<nav th:replace="fragments :: header"></nav>
+
+<form id="create" th:action="@{/doctors/create}" method="post">
+    <div class="form-group" >
+        <input type="submit" value="Add a Doctor" class="btn btn-success"/>
+    </div>
+</form>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Speciality</th>
+    </tr>
+    </thead>
+
+    <tr th:each="doctor : ${doctors}">
+        <td th:text="${doctor.id}"></td>
+        <td th:text="${doctor.doctorName}"></td>
+        <td th:text="${doctor.doctorSpeciality}"></td>
+    </tr>
+
+</table>
+</body>
+</html>
