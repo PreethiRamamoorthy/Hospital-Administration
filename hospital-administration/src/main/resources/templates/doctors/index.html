@@ -24,6 +24,12 @@
         <td th:text="${doctor.id}"></td>
         <td th:text="${doctor.doctorName}"></td>
         <td th:text="${doctor.doctorSpeciality}"></td>
+        <td>
+            <a th:href="@{/doctors/edit/{id}(id=${doctor.id})}">Edit</a>
+        </td>
+        <td>
+            <a th:href="@{/doctors/delete/{id}(id=${doctor.id})}">Delete</a>
+        </td>
     </tr>
 
 </table>

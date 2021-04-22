@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<header th:replace="fragments :: header"></header>
+<form method="post" th:action="@{/doctors/delete}">
+
+  <th:block th:each="doctor : ${doctors}">
+    <div class="form-group">
+      <label>
+            <span th:text="${doctor.doctorName}"></span>
+<!--        <span th:text="${doctor.doctorSpeciality}"></span>-->
+        <input type="checkbox" name="doctorIds" th:value="${doctor.id}" class="form-control">
+      </label>
+    </div>
+  </th:block>
+
+  <input type="hidden" th:value="${doctorIds}" name="doctorId" />
+  <input type="submit" value="Delete" class="btn btn-danger">
+
+</form>
+</body>
+</html>

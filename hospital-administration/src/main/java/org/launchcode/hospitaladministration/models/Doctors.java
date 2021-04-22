@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 public class Doctors extends AbstractEntity{
 
     @NotBlank
-    @Size(min=5,message="Name cannot be empty")
+    @Size(min=1,message="Name cannot be empty")
     private String doctorName;
 
     @NotBlank
