@@ -69,23 +69,23 @@ public class DoctorsController {
 //        return "redirect:";
 //    }
 
-
-    @GetMapping("delete/{doctorId}")
-    public String displayDeleteForm(Model model,@PathVariable int doctorId) {
-        model.addAttribute("doctors",doctorsRepository.findAllById(Collections.singleton(doctorId)));
-//        Optional<Doctors> doctors = doctorsRepository.findById(doctorId);
-        String title = "Deleting the below Doctor from the database";
-        model.addAttribute("title",title);
-        return "doctors/delete";
-    }
-
-    @PostMapping("delete")
-    public String processDeleteDoctorsForm(@RequestParam(required = false) int[] doctorIds) {
-        if (doctorIds != null) {
-            for (int id : doctorIds) {
-                doctorsRepository.deleteById(id);
-            }
-        }
-        return "redirect:";
-    }
+//
+//    @GetMapping("delete/{doctorId}")
+//    public String displayDeleteForm(Model model,@PathVariable int doctorId) {
+//        model.addAttribute("doctors",doctorsRepository.findAllById(Collections.singleton(doctorId)));
+////        Optional<Doctors> doctors = doctorsRepository.findById(doctorId);
+//        String title = "Deleting the below Doctor from the database";
+//        model.addAttribute("title",title);
+//        return "doctors/delete";
+//    }
+//
+//    @PostMapping("delete")
+//    public String processDeleteDoctorsForm(@RequestParam(required = false) int[] doctorIds) {
+//        if (doctorIds != null) {
+//            for (int id : doctorIds) {
+//                doctorsRepository.deleteById(id);
+//            }
+//        }
+//        return "redirect:";
+//    }
 }
