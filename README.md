@@ -12,7 +12,7 @@ MySQL.
 Hibernate.
 ThymeLeaf Templates
 
-# Hospital-Administration - USER STORIES
+## USER STORIES
 
 ## User Story1:
 Authentication Page: As an admin, I should be able to register for a user name and password for the first time and then use that to login the subsequent times. I should be able to see the index page where there are links to other pages like Doctors, Patients and Appointments. 
