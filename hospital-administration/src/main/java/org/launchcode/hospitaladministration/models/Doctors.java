@@ -1,8 +1,11 @@
 package org.launchcode.hospitaladministration.models;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Doctors extends AbstractEntity{
@@ -14,6 +17,7 @@ public class Doctors extends AbstractEntity{
     @NotBlank
     @Size(min=5,max=30,message="Please enter a valid Doctor Speciality.")
     private String doctorSpeciality;
+
 
     public Doctors(){}
 
@@ -37,4 +41,7 @@ public class Doctors extends AbstractEntity{
     public void setDoctorSpeciality(String doctorSpeciality) {
         this.doctorSpeciality = doctorSpeciality;
     }
+
+
+
 }

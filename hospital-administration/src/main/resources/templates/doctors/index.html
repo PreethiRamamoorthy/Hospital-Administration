@@ -22,7 +22,8 @@
 
     <tr th:each="doctor : ${doctors}">
         <td th:text="${doctor.id}"></td>
-        <td th:text="${doctor.doctorName}"></td>
+<!--        <td th:text="${doctor.doctorName}"></td>-->
+        <td><a th:text="${doctor.doctorName}" th:href="'/patients?doctor.id=' + ${doctor.id}"></a></td>
         <td th:text="${doctor.doctorSpeciality}"></td>
         <td>
             <a th:href="@{/doctors/edit/{id}(id=${doctor.id})}">Edit</a>
