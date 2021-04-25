@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<header th:replace="fragments :: header"></header>
+
+<form method="post">
+    <div class="form-group">
+        <label>Name
+            <input th:field="${patients.patientName}" class="form-control">
+        </label>
+        <p class="error" th:errors="${patients.patientName}"></p>
+
+        <label> Age
+            <input th:field="${patients.age}" class="form-control">
+        </label>
+        <p class="error" th:errors="${patients.age}"></p>
+
+        <label> Gender
+            <input th:field="${patients.gender}" class="form-control">
+        </label>
+        <p class="error" th:errors="${patients.gender}"></p>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Add" class="btn btn-success">
+    </div>
+</form>
+</body>
+</html>
