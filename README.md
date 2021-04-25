@@ -9,5 +9,20 @@ Creating a new doctor Information: As an admin, I should be able to add a new do
 ## User Story3: 
 Deleting doctor information: As an admin, I should be able to delete a specific doctor record from the screen as well as from the presistent layer.
 
-## User Sory4:
+## User Story4:
 Editing doctor information: As an admin, I should be able to edit a specific doctor information already on the screen as well as in the persistent layer.
+
+## User Story5:
+Creating new Patient Information: As an admin, I should be able to add a new patient information, when I navigate to the patients link from the index page.
+
+## User Story6:
+Deleting patient information: As an admin, I should be able to delete a specific patient information from the screen as well as the database. 
+
+## User Story7:
+Editing patient information: As an admin, I should be able to delete a specific patient information from the screen as well as the database. 
+
+## User Story8:
+Creating appointments: As an admin, I should be able to create appointments to patients with their doctor. 
+
+## User Story9:
+Editing/Cancelling Appointments: As an admin, I should be able to edit as well as cancel appointments. 
