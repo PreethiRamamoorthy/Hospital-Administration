@@ -1,23 +1,58 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="https://www.thymeleaf.org/">-->
+<!--<head th:replace="fragments :: head"></head>-->
+<!--<body class="container">-->
+<!--<header th:replace="fragments :: header"></header>-->
+
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org/">
-<head th:replace="fragments :: head"></head>
-<body class="container">
-<header th:replace="fragments :: header"></header>
-<form method="post" th:action="@{/doctors/delete}">
+<html xmlns:th="http://www.thymeleaf.org/">
 
-  <th:block th:each="doctor : ${doctors}">
-    <div class="form-group">
-      <label>
-            <span th:text="${doctor.doctorName}"></span>
-<!--        <span th:text="${doctor.doctorSpeciality}"></span>-->
-        <input type="checkbox" name="doctorIds" th:value="${doctor.id}" class="form-control">
-      </label>
+<head th:fragment="head">
+
+  <!-- Bootstrap stylesheets and script -->
+  <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+  <link th:href="@{/css/hospitaladministration.css}" rel="stylesheet" />
+  <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+
+  <title th:text="'Hospital Administration' + ${title == null ? '' : ' :: ' + title}">Hospital Administration</title>
+</head>
+
+<body>
+<div th:fragment="navigation-menu" class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a th:href="@{/}" class="navbar-brand">Hospital Administration</a>
     </div>
-  </th:block>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a th:href="@{/doctors}">Doctors</a></li>
+        <li><a th:href="@{/patients}">Patients</a></li>
+        <li><a th:href="@{/appointments}">Appointments</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/logout" th:href="@{/logout}">Log out</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container body-content">
+  <h4>You are deleting the following Doctor details. Please confirm by clicking the checkbox! </h4>
+  <form method="post" th:action="@{/doctors/delete}">
 
-  <input type="hidden" th:value="${doctorIds}" name="doctorId" />
-  <input type="submit" value="Delete" class="btn btn-danger">
+    <th:block th:each="doctor : ${doctors}">
+      <div class="form-group">
+        <label>
+              <span th:text="${doctor.doctorName}"></span>
+  <!--        <span th:text="${doctor.doctorSpeciality}"></span>-->
+          <input type="checkbox" name="doctorIds" th:value="${doctor.id}" class="form-control">
+        </label>
+      </div>
+    </th:block>
 
-</form>
+    <input type="hidden" th:value="${doctorIds}" name="doctorId" />
+    <input type="submit" value="Delete" class="btn btn-danger">
+
+  </form>
+</div>
 </body>
 </html>

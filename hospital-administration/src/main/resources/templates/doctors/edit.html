@@ -1,24 +1,71 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="https://www.thymeleaf.org/">-->
+<!--<head th:replace="fragments :: head"></head>-->
+<!--<body class="container">-->
+<!--<header th:replace="fragments :: header"></header>-->
+
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org/">
-<head th:replace="fragments :: head"></head>
-<body class="container">
-<header th:replace="fragments :: header"></header>
-<form method="post" th:action="@{/doctors/edit}">
+<html xmlns:th="http://www.thymeleaf.org/">
 
-  <div class="form-group">
-    <label>Name
-      <input type="text" name="name" class="form-control">
-    </label>
+<head th:fragment="head">
+
+  <!-- Bootstrap stylesheets and script -->
+  <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+  <link th:href="@{/css/hospitaladministration.css}" rel="stylesheet" />
+  <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+
+  <title th:text="'Hospital Administration' + ${title == null ? '' : ' :: ' + title}">Hospital Administration</title>
+</head>
+
+<body>
+<div th:fragment="navigation-menu" class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a th:href="@{/}" class="navbar-brand">Hospital Administration</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a th:href="@{/doctors}">Doctors</a></li>
+        <li><a th:href="@{/patients}">Patients</a></li>
+        <li><a th:href="@{/appointments}">Appointments</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/logout" th:href="@{/logout}">Log out</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="form-group">
-    <label>Speciality
-      <input type="text" name="speciality" class="form-control">
-    </label>
-  </div>
+</div>
+<div class="container body-content">
+  <h4>You are editing the following Doctor details. </h4>
+  <form method="post" th:action="@{/doctors/edit}">
+
+  <!--  <div class="form-group">-->
+  <!--    <label>Name-->
+  <!--      <input type="text" name="name" class="form-control">-->
+  <!--    </label>-->
+  <!--  </div>-->
+  <!--  <div class="form-group">-->
+  <!--    <label>Speciality-->
+  <!--      <input type="text" name="speciality" class="form-control">-->
+  <!--    </label>-->
+  <!--  </div>-->
+
+      <div class="form-group">
+        <label>Name
+          <input th:field="${doctors.doctorName}" class="form-control">
+        </label>
+        <p class="error" th:errors="${doctors.doctorName}"></p>
+
+        <label> Speciality
+          <input th:field="${doctors.doctorSpeciality}" class="form-control">
+        </label>
+        <p class="error" th:errors="${doctors.doctorSpeciality}"></p>
+      </div>
 
 
-  <input type="hidden" th:value="${doctorId}" name="doctorId" />
-  <input type="submit" value="Edit" class="btn btn-danger">
-</form>
+    <input type="hidden" th:value="${doctors.id}" name="doctorId" />
+    <input type="submit" value="Edit" class="btn btn-danger">
+  </form>
+</div>
 </body>
 </html>

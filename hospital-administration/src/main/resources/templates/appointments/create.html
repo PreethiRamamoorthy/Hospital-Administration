@@ -1,10 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org/">-->
-<!--<head th:replace="fragments :: head"></head>-->
-<!--<body class="container">-->
-
-<!--<header th:replace="fragments :: header"></header>-->
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org/">
 
@@ -36,25 +29,40 @@
         </div>
     </div>
 </div>
-
 <div class="container body-content">
 
     <form method="post">
         <div class="form-group">
-            <label>Name
-                <input th:field="${patients.patientName}" class="form-control">
+            <label>Appointment Date
+                <input th:field="${appointments.apptDate}" type="date" class="form-control">
             </label>
-            <p class="error" th:errors="${patients.patientName}"></p>
+            <p class="error" th:errors="${appointments.apptDate}"></p>
 
-            <label> Age
-                <input th:field="${patients.age}" class="form-control">
-            </label>
-            <p class="error" th:errors="${patients.age}"></p>
+<!--            <label> Patient Name-->
+<!--                <input th:field="${appointments.patientName}" class="form-control">-->
+<!--            </label>-->
+<!--            <p class="error" th:errors="${appointments.patientName}"></p>-->
 
-            <label> Gender
-                <input th:field="${patients.gender}" class="form-control">
+            <label> Patient Name
+                <select th:field="${appointments.patients}">
+                    <option th:each = "patient : ${patients}"
+                            th:value = "${patient.id}"
+                            th:text = "${patient.patientName}">
+                    </option>
+                </select>
             </label>
-            <p class="error" th:errors="${patients.gender}"></p>
+            <p class="error" th:errors="${appointments.patients}"></p>
+
+            <label>Doctor Name
+                <input th:field="${appointments.doctorName}" class="form-control">
+            </label>
+            <p class="error" th:errors="${appointments.doctorName}"></p>
+
+            <label>Reason for Visit
+                <input th:field="${appointments.complaint}" class="form-control">
+            </label>
+            <p class="error" th:errors="${appointments.complaint}"></p>
+
         </div>
 
         <div class="form-group">

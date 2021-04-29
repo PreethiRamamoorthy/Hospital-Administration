@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Collections;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("patients")
@@ -63,8 +64,31 @@ public class PatientsController {
         return "redirect:";
     }
 
-    @GetMapping("/goback")
-    public String gobackToIndexPage(){
-        return "/templates/index";
+    @GetMapping("edit/{patientId}")
+    public String displayEditForm(Model model,@PathVariable int patientId,@ModelAttribute Patients patients) {
+        //model.addAttribute("doctors",doctorsRepository.findAllById(Collections.singleton(doctorId)));
+        //model.addAttribute("doctors",doctorsRepository.findById(doctorId));
+        Optional<Patients> result = patientsRepository.findById(patientId);
+        patients = result.get();
+        String title = "Editing the below Patients details in the database";
+        model.addAttribute("title",title);
+        model.addAttribute("patients",patients);
+        return "patients/edit";
+    }
+
+    @PostMapping("edit")
+    public String processEditForm(Model model, @RequestParam(required = false) Integer patientId,@ModelAttribute Patients patients,Errors errors){
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Edit Patient Details");
+            return "patients/edit";
+        }
+        Optional<Patients> result = patientsRepository.findById(patientId);
+        Patients editPatient = result.get();
+        editPatient.setPatientName(patients.getPatientName());
+        editPatient.setAge(patients.getAge());
+        editPatient.setGender(patients.getGender());
+        //model.addAttribute("doctors",editDoctor);
+        patientsRepository.save(editPatient);
+        return "redirect:";
     }
 }

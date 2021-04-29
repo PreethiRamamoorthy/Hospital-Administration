@@ -1,47 +1,83 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org/">-->
+<!--<head th:replace="fragments :: head"></head>-->
+<!--<body class="container">-->
+
+<!--<nav th:replace="fragments :: header"></nav>-->
+<!--<nav th:replace="index :: navigation-menu"></nav>-->
+
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head"></head>
-<body class="container">
+<html xmlns:th="http://www.thymeleaf.org/">
 
-<nav th:replace="fragments :: header"></nav>
+<head th:fragment="head">
 
-<form id="create" th:action="@{/patients/create}" method="post">
-    <div class="form-group" >
-        <input type="submit" value="Add a Patient" class="btn btn-success"/>
+    <!-- Bootstrap stylesheets and script -->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <link th:href="@{/css/hospitaladministration.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+
+    <title th:text="'Hospital Administration' + ${title == null ? '' : ' :: ' + title}">Hospital Administration</title>
+</head>
+
+<body>
+<div th:fragment="navigation-menu" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a th:href="@{/}" class="navbar-brand">Hospital Administration</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/doctors}">Doctors</a></li>
+                <li><a th:href="@{/patients}">Patients</a></li>
+                <li><a th:href="@{/appointments}">Appointments</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout" th:href="@{/logout}">Log out</a></li>
+            </ul>
+        </div>
     </div>
-</form>
+</div>
+<div class="container body-content">
 
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Gender</th>
-    </tr>
-    </thead>
+    <form id="create" th:action="@{/patients/create}" method="post">
+        <div class="form-group" >
+            <input type="submit" value="Add a Patient" class="btn btn-success"/>
+        </div>
+    </form>
 
-    <tr th:each="patient : ${patients}">
-        <td th:text="${patient.id}"></td>
-        <td th:text="${patient.patientName}"></td>
-        <td th:text="${patient.age}"></td>
-        <td th:text="${patient.gender}"></td>
-        <td>
-            <a th:href="@{/patients/edit/{id}(id=${patient.id})}">Edit</a>
-        </td>
-        <td>
-            <a th:href="@{/patients/delete/{id}(id=${patient.id})}">Delete</a>
-        </td>
-    </tr>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+        </tr>
+        </thead>
 
-</table>
+        <tr th:each="patient : ${patients}">
+            <td th:text="${patient.id}"></td>
+            <td th:text="${patient.patientName}"></td>
+            <td th:text="${patient.age}"></td>
+            <td th:text="${patient.gender}"></td>
+            <td>
+                <a th:href="@{/patients/edit/{id}(id=${patient.id})}">Edit</a>
+            </td>
+            <td>
+                <a th:href="@{/patients/delete/{id}(id=${patient.id})}">Delete</a>
+            </td>
+        </tr>
 
-<nav>
+    </table>
 
-    <ul class="nav" style="float:right;">
-        <li class="nav-item"><a class="nav-link" href="/goback">Go Back To Main Menu</a></li>
-    </ul>
+    <nav>
 
-</nav>
+    <!--    <ul class="nav" style="float:right;">-->
+    <!--        <li class="nav-item"><a class="nav-link" href="/goback">Go Back To Main Menu</a></li>-->
+    <!--    </ul>-->
+
+
+    </nav>
+</div>
 </body>
 </html>

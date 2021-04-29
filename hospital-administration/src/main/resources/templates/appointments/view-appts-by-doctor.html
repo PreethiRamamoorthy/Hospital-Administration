@@ -1,9 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="https://www.thymeleaf.org/">-->
-<!--<head th:replace="fragments :: head"></head>-->
-<!--<body class="container">-->
-<!--<header th:replace="fragments :: header"></header>-->
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org/">
 
@@ -36,30 +30,6 @@
     </div>
 </div>
 <div class="container body-content">
-    <h4>You are editing the following patient details.</h4>
-<form method="post" th:action="@{/patients/edit}">
-
-        <div class="form-group">
-            <label>Name
-                <input th:field="${patients.patientName}" class="form-control">
-            </label>
-            <p class="error" th:errors="${patients.patientName}"></p>
-
-            <label> Age
-                <input th:field="${patients.age}" class="form-control">
-            </label>
-            <p class="error" th:errors="${patients.age}"></p>
-
-            <label> Gender
-                <input th:field="${patients.gender}" class="form-control">
-            </label>
-            <p class="error" th:errors="${patients.gender}"></p>
-        </div>
 
 
-    <input type="hidden" th:value="${patients.id}" name="patientId" />
-    <input type="submit" value="Edit" class="btn btn-danger">
-</form>
 </div>
-</body>
-</html>

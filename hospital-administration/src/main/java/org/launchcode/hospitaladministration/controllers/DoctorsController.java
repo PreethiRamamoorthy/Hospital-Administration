@@ -45,26 +45,28 @@ public class DoctorsController {
     }
 
     @GetMapping("edit/{doctorId}")
-    public String displayEditForm(Model model,@PathVariable int doctorId) {
+    public String displayEditForm(Model model,@PathVariable int doctorId,@ModelAttribute Doctors doctors) {
         //model.addAttribute("doctors",doctorsRepository.findAllById(Collections.singleton(doctorId)));
-        model.addAttribute("doctors",doctorsRepository.findById(doctorId));
-//        Optional<Doctors> doctors = doctorsRepository.findById(doctorId);
+        //model.addAttribute("doctors",doctorsRepository.findById(doctorId));
+        Optional<Doctors> result = doctorsRepository.findById(doctorId);
+        doctors = result.get();
         String title = "Editing the below Doctor details in the database";
         model.addAttribute("title",title);
+        model.addAttribute("doctors",doctors);
         return "doctors/edit";
     }
 
     @PostMapping("edit")
-    public String processEditForm(Model model, @RequestParam(required = false) Integer doctorId, String doctorName, String doctorSpeciality){
-//        if (errors.hasErrors()) {
-//            model.addAttribute("title", "Edit Doctor Details");
-//            return "doctors/edit";
-//        }
-        Optional<Doctors> doctors = doctorsRepository.findById(doctorId);
-        Doctors editDoctor = doctors.get();
-        editDoctor.setDoctorName(doctorName);
-        editDoctor.setDoctorSpeciality(doctorSpeciality);
-        model.addAttribute("doctors",editDoctor);
+    public String processEditForm(Model model, @RequestParam(required = false) Integer doctorId,@ModelAttribute Doctors doctors,Errors errors){
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Edit Doctor Details");
+            return "doctors/edit";
+        }
+        Optional<Doctors> result = doctorsRepository.findById(doctorId);
+        Doctors editDoctor = result.get();
+        editDoctor.setDoctorName(doctors.getDoctorName());
+        editDoctor.setDoctorSpeciality(doctors.getDoctorSpeciality());
+        //model.addAttribute("doctors",editDoctor);
         doctorsRepository.save(editDoctor);
         return "redirect:";
    }

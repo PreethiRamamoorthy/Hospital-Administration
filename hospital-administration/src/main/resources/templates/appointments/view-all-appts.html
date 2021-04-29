@@ -38,32 +38,24 @@
     </div>
 </div>
 <div class="container body-content">
-    <form id="create" th:action="@{/doctors/create}" method="post">
-        <div class="form-group" >
-            <input type="submit" value="Add a Doctor" class="btn btn-success"/>
-        </div>
-    </form>
 
     <table class="table table-striped">
         <thead>
         <tr>
             <th>ID</th>
-            <th>Name</th>
-            <th>Speciality</th>
+            <th>Appointment Date</th>
+            <th>Patient Name</th>
+            <th>Doctor Name</th>
+            <th>Reason for Visit</th>
         </tr>
         </thead>
 
-        <tr th:each="doctor : ${doctors}">
-            <td th:text="${doctor.id}"></td>
-            <td th:text="${doctor.doctorName}"></td>
-    <!--        <td><a th:text="${doctor.doctorName}" th:href="'/patients?doctor.id=' + ${doctor.id}"></a></td>-->
-            <td th:text="${doctor.doctorSpeciality}"></td>
-            <td>
-                <a th:href="@{/doctors/edit/{id}(id=${doctor.id})}">Edit</a>
-            </td>
-            <td>
-                <a th:href="@{/doctors/delete/{id}(id=${doctor.id})}">Delete</a>
-            </td>
+        <tr th:each="appointment : ${appointments}">
+            <td th:text="${appointment.id}"></td>
+                    <td th:text="${appointment.apptDate}"></td>
+                    <td th:text="${appointment.patientName}"></td>
+                    <td th:text="${appointment.doctorName}"></td>
+                    <td th:text="${appointment.complaint}"></td>
         </tr>
 
     </table>
