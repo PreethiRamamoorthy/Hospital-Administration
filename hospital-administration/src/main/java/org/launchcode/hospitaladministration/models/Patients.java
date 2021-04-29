@@ -22,6 +22,9 @@ public class Patients extends AbstractEntity {
     @NotBlank
     private String gender;
 
+    @OneToMany(mappedBy = "patients")
+    private final List<Appointments> appointments = new ArrayList<>();
+
     public Patients(){}
 
     public Patients(String patientName, int age, String gender) {
@@ -52,5 +55,9 @@ public class Patients extends AbstractEntity {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public List<Appointments> getAppointments() {
+        return appointments;
     }
 }

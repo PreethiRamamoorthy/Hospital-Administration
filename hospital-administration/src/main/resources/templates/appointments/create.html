@@ -54,9 +54,15 @@
             <p class="error" th:errors="${appointments.patients}"></p>
 
             <label>Doctor Name
-                <input th:field="${appointments.doctorName}" class="form-control">
+<!--                <input th:field="${appointments.doctorName}" class="form-control">-->
+                <select th:field="${appointments.doctors}">
+                    <option th:each = "doctor : ${doctors}"
+                            th:value = "${doctor.id}"
+                            th:text = "${doctor.doctorName}">
+                    </option>
+                </select>
             </label>
-            <p class="error" th:errors="${appointments.doctorName}"></p>
+            <p class="error" th:errors="${appointments.doctors}"></p>
 
             <label>Reason for Visit
                 <input th:field="${appointments.complaint}" class="form-control">

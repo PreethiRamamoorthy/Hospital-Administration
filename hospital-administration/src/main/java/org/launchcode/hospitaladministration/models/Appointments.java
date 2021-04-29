@@ -22,15 +22,17 @@ public class Appointments extends AbstractEntity{
     private Date apptDate;
 
     @ManyToOne
-    @NotNull(message="Name cannot be empty")
+    @NotNull(message="Please select a patient from the list.")
     //@Size(min=1,message="Name cannot be empty")
     //private String patientName;
     private Patients patients;
 
 
-    @NotBlank
-    @Size(min=1,message="Name cannot be empty")
-    private String doctorName;
+    @ManyToOne
+    @NotNull(message="Please select a doctor from the list.")
+    //@Size(min=1,message="Name cannot be empty")
+    //private String doctorName;
+    private Doctors doctors;
 
     @NotBlank
     @Size(min=3,message="Complaint cannot be empty")
@@ -38,10 +40,10 @@ public class Appointments extends AbstractEntity{
 
     public Appointments() {}
 
-    public Appointments(Date apptDate, Patients patients, String doctorName, String complaint) {
+    public Appointments(Date apptDate, Patients patients, Doctors doctors, String complaint) {
         this.apptDate = apptDate;
         this.patients = patients;
-        this.doctorName = doctorName;
+        this.doctors = doctors;
         this.complaint = complaint;
     }
 
@@ -61,12 +63,12 @@ public class Appointments extends AbstractEntity{
         this.patients = patients;
     }
 
-    public String getDoctorName() {
-        return doctorName;
+    public Doctors getDoctors() {
+        return doctors;
     }
 
-    public void setDoctorName(String doctorName) {
-        this.doctorName = doctorName;
+    public void setDoctors(Doctors doctors) {
+        this.doctors = doctors;
     }
 
     public String getComplaint() {

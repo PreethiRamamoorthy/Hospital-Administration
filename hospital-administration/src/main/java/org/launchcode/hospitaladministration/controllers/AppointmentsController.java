@@ -5,16 +5,15 @@ import org.launchcode.hospitaladministration.data.DoctorsRepository;
 import org.launchcode.hospitaladministration.data.PatientsRepository;
 import org.launchcode.hospitaladministration.models.Appointments;
 import org.launchcode.hospitaladministration.models.Doctors;
+import org.launchcode.hospitaladministration.models.Patients;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("appointments")
@@ -51,10 +50,12 @@ public class AppointmentsController {
     }
 
     @PostMapping("create")
-    public String processCreateAppointmentsForm(@ModelAttribute @Valid Appointments appointments, Errors errors, Model model){
+    public String processCreateAppointmentsForm(@ModelAttribute @Valid Appointments appointments,Errors errors, Model model){
         if (errors.hasErrors()) {
             model.addAttribute("title", "Schedule an Appointment");
             model.addAttribute(new Appointments());
+            model.addAttribute("patients",patientsRepository.findAll());
+            model.addAttribute("doctors",doctorsRepository.findAll());
             return "appointments/create";
         }
         appointmentsRepository.save(appointments);

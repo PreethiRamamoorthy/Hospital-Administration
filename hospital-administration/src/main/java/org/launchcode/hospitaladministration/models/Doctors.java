@@ -19,7 +19,8 @@ public class Doctors extends AbstractEntity{
     @Size(min=5,max=30,message="Please enter a valid Doctor Speciality.")
     private String doctorSpeciality;
 
-
+    @OneToMany(mappedBy = "doctors")
+    private final List<Appointments> appointments = new ArrayList<>();
 
     public Doctors(){}
 
@@ -44,4 +45,7 @@ public class Doctors extends AbstractEntity{
         this.doctorSpeciality = doctorSpeciality;
     }
 
+    public List<Appointments> getAppointments() {
+        return appointments;
+    }
 }
