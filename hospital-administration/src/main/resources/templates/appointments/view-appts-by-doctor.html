@@ -30,6 +30,30 @@
     </div>
 </div>
 <div class="container body-content">
+    <h4>Select the doctor Name by which you need to filter the details!! </h4>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Appointment Date & Time</th>
+            <th>Patient Name</th>
+            <th>Doctor Name</th>
+            <th>Reason for Visit</th>
+        </tr>
+        </thead>
 
+        <tr th:each="appointment : ${appointments}">
+            <td th:text="${appointment.id}"></td>
+            <td th:text="${appointment.apptDate}"></td>
+            <td th:text="${appointment.patients.patientName}"></td>
+            <td th:text="${appointment.doctors.doctorName}"></td>
+            <td th:text="${appointment.complaint}"></td>
+            <td>
+                <a th:href="@{/appointments/view-appts-by-doctor/{id}(id=${appointment.doctors.id})}">Select</a>
 
+            </td>
+        </tr>
+    </table>
 </div>
+</body>
+</html>

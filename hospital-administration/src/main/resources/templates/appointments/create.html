@@ -33,8 +33,9 @@
 
     <form method="post">
         <div class="form-group">
-            <label>Appointment Date
-                <input th:field="${appointments.apptDate}" type="date" class="form-control">
+            <label>Appointment Date&Time
+<!--                <input th:field="${appointments.apptDate}" type="date" class="form-control">-->
+                <input th:field="${appointments.apptDate}" type="datetime-local" class="form-control">
             </label>
             <p class="error" th:errors="${appointments.apptDate}"></p>
 

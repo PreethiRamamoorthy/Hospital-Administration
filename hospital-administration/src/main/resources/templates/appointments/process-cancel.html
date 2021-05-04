@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+
+<head th:fragment="head">
+
+  <!-- Bootstrap stylesheets and script -->
+  <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+  <link th:href="@{/css/hospitaladministration.css}" rel="stylesheet" />
+  <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+
+  <title th:text="'Hospital Administration' + ${title == null ? '' : ' :: ' + title}">Hospital Administration</title>
+</head>
+
+<body>
+<div th:fragment="navigation-menu" class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a th:href="@{/}" class="navbar-brand">Hospital Administration</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a th:href="@{/doctors}">Doctors</a></li>
+        <li><a th:href="@{/patients}">Patients</a></li>
+        <li><a th:href="@{/appointments}">Appointments</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/logout" th:href="@{/logout}">Log out</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container body-content">
+  <h4>You are Cancelling the below Appointment.</h4>
+  <form method="post" th:action="@{/appointments/process-cancel}">
+
+    <th:block th:each="appointment : ${appointments}">
+      <div class="form-group">
+        <label>
+          <span th:text="${appointment.apptDate}"></span>
+          <!--        <span th:text="${doctor.doctorSpeciality}"></span>-->
+          <input type="checkbox" name="appointmentIds" th:value="${appointment.id}" class="form-control">
+        </label>
+      </div>
+    </th:block>
+
+    <input type="hidden" th:value="${appointmentIds}" name="appointmentId" />
+    <input type="submit" value="Delete" class="btn btn-danger">
+
+<!--   <input type="hidden" th:value="${appointments.id}" name="appointmentId" />-->
+<!--    <input type="submit" value="Edit" class="btn btn-danger">-->
+  </form>
+</div>
+</body>
+</html>

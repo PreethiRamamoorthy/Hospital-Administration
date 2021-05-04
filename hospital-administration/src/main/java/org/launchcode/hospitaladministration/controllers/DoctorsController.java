@@ -1,6 +1,7 @@
 package org.launchcode.hospitaladministration.controllers;
 
 import org.launchcode.hospitaladministration.data.DoctorsRepository;
+import org.launchcode.hospitaladministration.models.Appointments;
 import org.launchcode.hospitaladministration.models.Doctors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -89,4 +90,5 @@ public class DoctorsController {
         }
         return "redirect:";
     }
+
 }

@@ -1,5 +1,6 @@
 package org.launchcode.hospitaladministration.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
@@ -9,27 +10,27 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
-public class Appointments extends AbstractEntity{
+public class Appointments extends AbstractEntity {
 
-    @NotNull(message="Date field cannot blank")
+
     //@DateTimeFormat(pattern="yyyy-MM-dd")
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
-    @Future
-    //@DateTimeFormat
-    private Date apptDate;
+    //@DateTimeFormat(pattern = "MM/dd/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX")
+    //@Future
+    private String apptDate;
 
     @ManyToOne
-    @NotNull(message="Please select a patient from the list.")
     //@Size(min=1,message="Name cannot be empty")
     //private String patientName;
     private Patients patients;
 
-
     @ManyToOne
-    @NotNull(message="Please select a doctor from the list.")
     //@Size(min=1,message="Name cannot be empty")
     //private String doctorName;
     private Doctors doctors;
@@ -40,18 +41,18 @@ public class Appointments extends AbstractEntity{
 
     public Appointments() {}
 
-    public Appointments(Date apptDate, Patients patients, Doctors doctors, String complaint) {
+    public Appointments(String apptDate, Patients patients, Doctors doctors, String complaint) {
         this.apptDate = apptDate;
         this.patients = patients;
         this.doctors = doctors;
         this.complaint = complaint;
     }
 
-    public Date getApptDate() {
+    public String getApptDate() {
         return apptDate;
     }
 
-    public void setapptDate(Date apptDate) {
+    public void setapptDate(String apptDate) {
         this.apptDate = apptDate;
     }
 
