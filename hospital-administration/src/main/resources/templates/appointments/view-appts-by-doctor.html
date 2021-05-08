@@ -46,12 +46,16 @@
             <td th:text="${appointment.id}"></td>
             <td th:text="${appointment.apptDate}"></td>
             <td th:text="${appointment.patients.patientName}"></td>
-            <td th:text="${appointment.doctors.doctorName}"></td>
-            <td th:text="${appointment.complaint}"></td>
+<!--            <td th:text="${appointment.doctors.doctorName}"></td>-->
             <td>
-                <a th:href="@{/appointments/view-appts-by-doctor/{id}(id=${appointment.doctors.id})}">Select</a>
+                <a th:href="@{/appointments/view-appts-by-doctor/{id}(id=${appointment.doctors.id})}"th:text="${appointment.doctors.doctorName}"></a>
 
             </td>
+            <td th:text="${appointment.complaint}"></td>
+<!--            <td>-->
+<!--                <a th:href="@{/appointments/view-appts-by-doctor/{id}(id=${appointment.doctors.id})}">Select</a>-->
+
+<!--            </td>-->
         </tr>
     </table>
 </div>

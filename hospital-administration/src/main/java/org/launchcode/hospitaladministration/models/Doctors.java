@@ -22,6 +22,9 @@ public class Doctors extends AbstractEntity{
     @OneToMany(mappedBy = "doctors")
     private final List<Appointments> appointments = new ArrayList<>();
 
+    @OneToMany(mappedBy = "doctors")
+    private final List<Patients> patients = new ArrayList<>();
+
     public Doctors(){}
 
     public Doctors(String doctorName, String doctorSpeciality) {

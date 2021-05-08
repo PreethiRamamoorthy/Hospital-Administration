@@ -126,13 +126,42 @@ public class AppointmentsController {
     }
 
     @GetMapping("view-appts-by-doctor/{doctorId}")
-    public String renderViewApptsByDoctorForm(Model model, @PathVariable int doctorId){
-        model.addAttribute("appointments",appointmentsRepository.findById(doctorId));
-        return"appointments/view-appts-by-doctor";
+    public String renderViewApptsByDoctorForm(Model model, @PathVariable int doctorId,Appointments appointments){
+//        Optional<Appointments> result = appointmentsRepository.findById(doctorId);
+//        appointments = result.get();
+        //model.addAttribute("appointments",appointmentsRepository.findAllById(Collections.singleton(doctorId)));
+        model.addAttribute("appointments",appointmentsRepository.findByDoctorId(doctorId));
+        System.out.println("$$$$"+ appointments.toString());
+        //model.addAttribute("appointments",appointments);
+        return "appointments/process-view-appts-by-doctor";
     }
 
-//    @PostMapping("view-appts-by-doctor")
-//    public String processViewApptsByDoctor(Model model,@RequestParam(required = false) Integer doctorId,@ModelAttribute Appointments appointments,Errors errors){
-//        model.addAttribute()
+//    @PostMapping("process-view-appts-by-doctor")
+//    public String processViewApptsByDoctor(Model model,@RequestParam(required = false) Integer doctorId,@ModelAttribute Appointments appointments,@ModelAttribute Doctors doctors, Errors errors){
+//        if (errors.hasErrors()) {
+//            model.addAttribute("title", "View All Appointment by Doctor");
+//            return "appointments/process-view-appts-by-doctor";
+//        }
+//        Optional<Appointments> result = appointmentsRepository.findById(doctorId);
+//        appointments = result.get();
+//        //Doctors matchDoctorName = (Doctors) doctorsRepository.findByName(doctors.getDoctorName());
+//        if(appointments.getDoctors().getId() == doctors.getId()) {
+//            if ((appointments.getDoctors().getDoctorName()).equals(doctorsRepository.findByName(doctors.getDoctorName()))) {
+//                model.addAttribute("appointments", appointments);
+//            }
+//        }
+//        return "redirect:";
+//    }
+
+//    @PostMapping("process-view-appts-by-doctor")
+//    public String processViewApptsByDoctor(Model model, @RequestParam(required = false) Integer doctorId, @ModelAttribute Doctors doctors, @ModelAttribute Appointments appointments, Errors errors){
+//        Optional<Appointments> result = appointmentsRepository.findById(doctorId);
+//        appointments = result.get();
+//        if(appointments.getDoctors().getId() == doctors.getId()) {
+//            if(appointments.getDoctors().getId() == doctorId) {
+//                model.addAttribute("appointments", appointments);
+//            }
+//        }
+//        return "redirect:";
 //    }
 }

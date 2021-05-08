@@ -25,6 +25,9 @@ public class Patients extends AbstractEntity {
     @OneToMany(mappedBy = "patients")
     private final List<Appointments> appointments = new ArrayList<>();
 
+    @ManyToOne
+    private Doctors doctors;
+
     public Patients(){}
 
     public Patients(String patientName, int age, String gender) {

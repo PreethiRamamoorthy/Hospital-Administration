@@ -30,7 +30,7 @@
   </div>
 </div>
 <div class = "container body-content">
-  <h4>You are now seeing the details of Doctor </h4>
+  <h4>You are now seeing the details of Doctor  </h4>
   <table class="table table-striped">
     <thead>
     <tr>
@@ -41,6 +41,14 @@
       <th>Reason for Visit</th>
     </tr>
     </thead>
+
+  <tr th:each="appointment : ${appointments}">
+    <td th:text="${appointment.id}"></td>
+    <td th:text="${appointment.apptDate}"></td>
+    <td th:text="${appointment.patients.patientName}"></td>
+    <td th:text="${appointment.doctors.doctorName}"></td>
+    <td th:text="${appointment.complaint}"></td>
+  </tr>
   </table>
 </div>
 </body>
