@@ -40,3 +40,6 @@ Creating appointments: As an admin, I should be able to create appointments to p
 
 ## User Story9:
 Editing/Cancelling Appointments: As an admin, I should be able to edit as well as cancel appointments. 
+
+## User Story9:
+Viewing All Apts: As an admin, I should be able to view all the appointments in the system. 
