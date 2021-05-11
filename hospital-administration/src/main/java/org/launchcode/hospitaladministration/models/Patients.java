@@ -1,8 +1,6 @@
 package org.launchcode.hospitaladministration.models;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,18 +20,20 @@ public class Patients extends AbstractEntity {
     @NotBlank
     private String gender;
 
-    @OneToMany(mappedBy = "patients")
+    @OneToMany(mappedBy = "patients",cascade = {CascadeType.ALL})
     private final List<Appointments> appointments = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "doctors_id")
     private Doctors doctors;
 
     public Patients(){}
 
-    public Patients(String patientName, int age, String gender) {
+    public Patients(String patientName, int age, String gender, Doctors doctors) {
         this.patientName = patientName;
         this.age = age;
         this.gender = gender;
+        this.doctors = doctors;
     }
 
     public String getPatientName() {
@@ -62,5 +62,13 @@ public class Patients extends AbstractEntity {
 
     public List<Appointments> getAppointments() {
         return appointments;
+    }
+
+    public Doctors getDoctors() {
+        return doctors;
+    }
+
+    public void setDoctors(Doctors doctors) {
+        this.doctors = doctors;
     }
 }

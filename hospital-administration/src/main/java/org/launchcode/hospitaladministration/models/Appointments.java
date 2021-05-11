@@ -3,9 +3,7 @@ package org.launchcode.hospitaladministration.models;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -16,8 +14,8 @@ import java.util.Date;
 import java.time.LocalDate;
 
 @Entity
-public class Appointments extends AbstractEntity {
-
+@Table(name = "appointments")
+public class Appointments extends AbstractEntity{
 
     //@DateTimeFormat(pattern="yyyy-MM-dd")
     //@DateTimeFormat(pattern = "MM/dd/yyyy")
@@ -25,12 +23,15 @@ public class Appointments extends AbstractEntity {
     //@Future
     private String apptDate;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "patients_id")
     //@Size(min=1,message="Name cannot be empty")
     //private String patientName;
     private Patients patients;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    //@ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name = "doctors_id")
     //@Size(min=1,message="Name cannot be empty")
     //private String doctorName;
     private Doctors doctors;

@@ -1,15 +1,16 @@
 package org.launchcode.hospitaladministration.models;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-public class Doctors extends AbstractEntity{
+@Table(name = "doctors")
+public class Doctors extends AbstractEntity {
 
     @NotBlank
     @Size(min=1,message="Name cannot be empty")
@@ -19,18 +20,22 @@ public class Doctors extends AbstractEntity{
     @Size(min=5,max=30,message="Please enter a valid Doctor Speciality.")
     private String doctorSpeciality;
 
-    @OneToMany(mappedBy = "doctors")
-    private final List<Appointments> appointments = new ArrayList<>();
+    @OneToMany(mappedBy = "doctors",fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    //private final List<Appointments> appointments = new ArrayList<>();
+    private List<Appointments> appointments;
 
-    @OneToMany(mappedBy = "doctors")
+    @OneToMany(mappedBy = "doctors",cascade = {CascadeType.ALL})
     private final List<Patients> patients = new ArrayList<>();
 
     public Doctors(){}
 
-    public Doctors(String doctorName, String doctorSpeciality) {
+
+    public Doctors(String doctorName, String doctorSpeciality, List<Appointments> appointments) {
         this.doctorName = doctorName;
         this.doctorSpeciality = doctorSpeciality;
+        this.appointments = appointments;
     }
+
 
     public String getDoctorName() {
         return doctorName;
@@ -50,5 +55,13 @@ public class Doctors extends AbstractEntity{
 
     public List<Appointments> getAppointments() {
         return appointments;
+    }
+
+    public void setAppointments(List<Appointments> appointments) {
+        this.appointments = appointments;
+    }
+
+    public List<Patients> getPatients() {
+        return patients;
     }
 }

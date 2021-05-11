@@ -23,34 +23,34 @@
         <li><a th:href="@{/patients}">Patients</a></li>
         <li><a th:href="@{/appointments}">Appointments</a></li>
       </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/logout" th:href="@{/logout}">Log out</a></li>
-        </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/logout" th:href="@{/logout}">Log out</a></li>
+      </ul>
     </div>
   </div>
 </div>
 <div class="container body-content">
 
-  <h1> WELCOME TO ABC MULTI SPECIALITY HOSPITAL</h1>
-  <h4> You have logged in as an admin!! In this role, you have the necessary privileges for the following activities in this app.</h4>
-  <br>
-  <ul>
-    <li>Add a new doctor Information. </li>
-    <li> Edit a doctor Information.</li>
-    <li>Delete a doctor Information.</li>
-    <li>Add a new patient Information.</li>
-    <li>Edit a patient information.</li>
-    <li>Delete a Patient Information. </li>
-    <li>Create a new appointment.</li>
-    <li>Edit an appointment. </li>
-    <li>Cancel an appointment.</li>
-    <li> Viewing all the appointments. </li>
-    <li> Filter all appointments by doctor </li>
-    <li> Filter all appointments by patient </li>
-  </ul>
-  <br>
-  <h4> Please use the navigation bar at the top to do the required tasks in this app. </h4>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Doctor Name</th>
+      <th>Patient Name</th>
+      <th>Patient Age</th>
+      <th>Patient Gender</th>
+    </tr>
+    </thead>
 
+    <tr th:each="patient : ${patients}">
+      <td th:text="${patient.id}"></td>
+      <td th:text="${patient.doctors.doctorName}"></td>
+      <td th:text="${doctor.patients.patientName}"></td>
+      <td th:text="${doctor.patients.age}"></td>
+      <td th:text="${doctor.patients.gender}"></td>
+    </tr>
+
+  </table>
 </div>
 </body>
 </html>

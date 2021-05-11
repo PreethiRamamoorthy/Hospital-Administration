@@ -4,17 +4,15 @@ import org.launchcode.hospitaladministration.data.AppointmentsRepository;
 import org.launchcode.hospitaladministration.data.DoctorsRepository;
 import org.launchcode.hospitaladministration.data.PatientsRepository;
 import org.launchcode.hospitaladministration.models.Appointments;
-import org.launchcode.hospitaladministration.models.Doctors;
-import org.launchcode.hospitaladministration.models.Patients;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Path;
 import javax.validation.Valid;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -36,27 +34,27 @@ public class AppointmentsController {
     }
 
     @RequestMapping("view-all-appts")
-    public String displayAllAppointments(Model model){
-        model.addAttribute("title","All Appointments");
-        model.addAttribute("appointments",appointmentsRepository.findAll());
+    public String displayAllAppointments(Model model) {
+        model.addAttribute("title", "All Appointments");
+        model.addAttribute("appointments", appointmentsRepository.findAll());
         return "appointments/view-all-appts";
     }
 
     @GetMapping("create")
-    public String renderCreateAppointmentsForm(Model model){
-        model.addAttribute("title","Schedule an Appointment");
+    public String renderCreateAppointmentsForm(Model model) {
+        model.addAttribute("title", "Schedule an Appointment");
         model.addAttribute(new Appointments());
-        model.addAttribute("patients",patientsRepository.findAll());
-        model.addAttribute("doctors",doctorsRepository.findAll());
+        model.addAttribute("patients", patientsRepository.findAll());
+        model.addAttribute("doctors", doctorsRepository.findAll());
         return "appointments/create";
     }
 
     @PostMapping("create")
-    public String processCreateAppointmentsForm(@ModelAttribute @Valid Appointments appointments,Errors errors, Model model){
+    public String processCreateAppointmentsForm(@ModelAttribute @Valid Appointments appointments, Errors errors, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Schedule an Appointment");
-            model.addAttribute("patients",patientsRepository.findAll());
-            model.addAttribute("doctors",doctorsRepository.findAll());
+            model.addAttribute("patients", patientsRepository.findAll());
+            model.addAttribute("doctors", doctorsRepository.findAll());
             return "appointments/create";
         }
         appointmentsRepository.save(appointments);
@@ -64,24 +62,24 @@ public class AppointmentsController {
     }
 
     @RequestMapping("edit")
-    public String displayEditForm(Model model,@ModelAttribute Appointments appointments) {
-        model.addAttribute("title","All Appointments");
-        model.addAttribute("appointments",appointmentsRepository.findAll());
+    public String displayEditForm(Model model, @ModelAttribute Appointments appointments) {
+        model.addAttribute("title", "All Appointments");
+        model.addAttribute("appointments", appointmentsRepository.findAll());
         return "appointments/edit";
     }
 
     @GetMapping("edit/{appointmentId}")
-    public String renderApptIDInEditForm(Model model,@PathVariable int appointmentId,@ModelAttribute Appointments appointments) {
+    public String renderApptIDInEditForm(Model model, @PathVariable int appointmentId, @ModelAttribute Appointments appointments) {
         Optional<Appointments> result = appointmentsRepository.findById(appointmentId);
         appointments = result.get();
         String title = "Editing the below Appointment details in the database";
-        model.addAttribute("title",title);
-        model.addAttribute("appointments",appointments);
+        model.addAttribute("title", title);
+        model.addAttribute("appointments", appointments);
         return "appointments/process-edit";
     }
 
     @PostMapping("process-edit")
-    public String processEditForm(Model model, @RequestParam(required = false) Integer appointmentId,@ModelAttribute Appointments appointments,Errors errors){
+    public String processEditForm(Model model, @RequestParam(required = false) Integer appointmentId, @ModelAttribute Appointments appointments, Errors errors) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Edit Appointment Details");
             return "appointments/process-edit";
@@ -95,17 +93,17 @@ public class AppointmentsController {
     }
 
     @RequestMapping("cancel")
-    public String displayCancelApptForm(Model model,@ModelAttribute Appointments appointments) {
-        model.addAttribute("title","All Appointments");
-        model.addAttribute("appointments",appointmentsRepository.findAll());
+    public String displayCancelApptForm(Model model, @ModelAttribute Appointments appointments) {
+        model.addAttribute("title", "All Appointments");
+        model.addAttribute("appointments", appointmentsRepository.findAll());
         return "appointments/cancel";
     }
 
     @GetMapping("cancel/{appointmentId}")
-    public String renderCancelApptForm(Model model,@PathVariable int appointmentId) {
-        model.addAttribute("appointments",appointmentsRepository.findAllById(Collections.singleton(appointmentId)));
+    public String renderCancelApptForm(Model model, @PathVariable int appointmentId) {
+        model.addAttribute("appointments", appointmentsRepository.findAllById(Collections.singleton(appointmentId)));
         String title = "Deleting the below Doctor from the database";
-        model.addAttribute("title",title);
+        model.addAttribute("title", title);
         return "appointments/process-cancel";
     }
 
@@ -120,21 +118,47 @@ public class AppointmentsController {
     }
 
     @RequestMapping("view-appts-by-doctor")
-    public String viewApptsByDoctorForm(Model model, Appointments appointments){
-        model.addAttribute("appointments",appointmentsRepository.findAll());
+    public String viewApptsByDoctorForm(Model model, Appointments appointments) {
+        model.addAttribute("appointments", appointmentsRepository.findAll());
         return "appointments/view-appts-by-doctor";
     }
 
     @GetMapping("view-appts-by-doctor/{doctorId}")
-    public String renderViewApptsByDoctorForm(Model model, @PathVariable int doctorId,Appointments appointments){
+    public String renderViewApptsByDoctorForm(Model model, @PathVariable Integer doctorId) {
 //        Optional<Appointments> result = appointmentsRepository.findById(doctorId);
 //        appointments = result.get();
         //model.addAttribute("appointments",appointmentsRepository.findAllById(Collections.singleton(doctorId)));
-        model.addAttribute("appointments",appointmentsRepository.findByDoctorId(doctorId));
-        System.out.println("$$$$"+ appointments.toString());
-        //model.addAttribute("appointments",appointments);
+        model.addAttribute("appointments", appointmentsRepository.findByDoctorsId(doctorId));
         return "appointments/process-view-appts-by-doctor";
+
     }
+
+    @RequestMapping("view-appts-by-patient")
+    public String viewApptsByPatientForm(Model model, Appointments appointments) {
+        model.addAttribute("appointments", appointmentsRepository.findAll());
+        return "appointments/view-appts-by-patient";
+    }
+
+    @GetMapping("view-appts-by-patient/{patientId}")
+    public String renderViewApptsByPatientForm(Model model, @PathVariable Integer patientId) {
+        model.addAttribute("appointments", appointmentsRepository.findByPatientsId(patientId));
+        return "appointments/process-view-appts-by-patients";
+    }
+
+
+    @RequestMapping("view-doctor-to-patient-relation")
+    public String viewPatientsForADoctor(Model model) {
+        model.addAttribute("patients", patientsRepository.findAll());
+        return "appointments/view-doctor-to-patient-relation";
+    }
+}
+
+    //    @GetMapping("view-appts-by-doctor/{doctorId}")
+//    public List<Appointments> renderViewApptsByDoctorForm(Model model,@PathVariable(value = "postId") int doctorId) {
+//        //model.addAttribute("appointments",appointmentsRepository.findByDoctorId(doctorId));
+//        //return "appointments/process-view-appts-by-doctor";
+//        return appointmentsRepository.findByDoctorId(doctorId);
+//    }
 
 //    @PostMapping("process-view-appts-by-doctor")
 //    public String processViewApptsByDoctor(Model model,@RequestParam(required = false) Integer doctorId,@ModelAttribute Appointments appointments,@ModelAttribute Doctors doctors, Errors errors){
@@ -164,4 +188,4 @@ public class AppointmentsController {
 //        }
 //        return "redirect:";
 //    }
-}
+
